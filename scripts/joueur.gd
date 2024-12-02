@@ -1,13 +1,36 @@
 extends CharacterBody2D
 
 #vitesse de déplacement
-const VITESSE = 250.0
+const VITESSE = 50.0
 const un_sur_r2 = 1/sqrt(2)
 enum DIRECTION {
-	GAUCHE,
-	DROIT
+	NORD,
+	NORDEST,
+	SUDEST,
+	SUD,
+	SUDOUEST,
+	NORDOUEST
 }
-@export var direction := DIRECTION.DROIT
+
+const idle_animation_name = {
+	DIRECTION.NORD : "idleN",
+	DIRECTION.NORDEST : "idleNE",
+	DIRECTION.NORDOUEST : "idleNO",
+	DIRECTION.SUD : "idleS",
+	DIRECTION.SUDEST : "idleSE",
+	DIRECTION.SUDOUEST : "idleSO",
+}
+
+const run_animation_name = {
+	DIRECTION.NORD : "runN",
+	DIRECTION.NORDEST : "runNE",
+	DIRECTION.NORDOUEST : "runNO",
+	DIRECTION.SUD : "runS",
+	DIRECTION.SUDEST : "runSE",
+	DIRECTION.SUDOUEST : "runSO",
+}
+
+@export var direction := DIRECTION.SUD
 func get_direction():
 	return direction
 
@@ -15,38 +38,57 @@ func get_direction():
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var main_gauche: Sprite2D = $main_gauche
 @onready var main_droite: Sprite2D = $main_droite
+var is_running := false
+
+func _ready() -> void:
+	animated_sprite_2d.play("idleS")
 
 
 # processus physiques du joueur ayant lieu au cours d'un temps "delta"
 func _physics_process(delta: float) -> void:
 	
-	# directin = -1,0,1 selon les touches pressées
+	# direction = -1,0,1 selon les touches pressées
 	var direction_x := Input.get_axis("déplacement_gauche", "déplacement_droit")
 	var direction_y := Input.get_axis("déplacement_haut", "déplacement_bas")
+	var vecteur_direction = Vector2i(direction_x,direction_y)
 	
-	if abs(direction_x) + abs(direction_y) < 2:
+	#Déplacement
+	if abs(direction_x) + abs(direction_y) < 1.5: #moins d'une direction à la fois
 		velocity.x = direction_x * VITESSE
 		velocity.y = direction_y * VITESSE
-	else:
+	else: #Sinon on normalise par racine de 2 :p
 		velocity.x = direction_x * VITESSE * un_sur_r2
 		velocity.y = direction_y * VITESSE * un_sur_r2
-		
 	
-	if direction_x == 0:
-		#pas de déplacement
-		if direction == DIRECTION.GAUCHE:
-			animated_sprite_2d.play("idle_3_4_g")
-		else:
-			animated_sprite_2d.play("idle_3_4_d")
+	#Mise à jour de la direction du joueur
+	match vecteur_direction:
+		Vector2i(0,0):
+			pass
+		Vector2i(0,1):
+			direction = DIRECTION.SUD
+		Vector2i(-1,0):
+			direction = DIRECTION.SUDOUEST
+		Vector2i(1,0):
+			direction = DIRECTION.SUDEST
+		Vector2i(-1,1):
+			direction = DIRECTION.SUDOUEST
+		Vector2i(1,1):
+			direction = DIRECTION.SUDEST
+		Vector2i(0,-1):
+			direction = DIRECTION.NORD
+		Vector2i(-1,-1):
+			direction = DIRECTION.NORDOUEST
+		Vector2i(1,-1):
+			direction = DIRECTION.NORDEST
+		
+	#Début de l'animation de repos
+	if is_running and vecteur_direction == Vector2i(0,0):
+		is_running = false
+		animated_sprite_2d.play(idle_animation_name[direction])
+	elif vecteur_direction != Vector2i(0,0):
+		is_running = true
+		animated_sprite_2d.play(run_animation_name[direction])
 	
-	elif direction_x == 1: #déplacement vers la gauche
-		animated_sprite_2d.play("marche_3_4_d")
-		direction = DIRECTION.DROIT
-		
-	elif direction_x ==-1: #déplacement vers la gauche
-		animated_sprite_2d.play("marche_3_4_g")
-		direction = DIRECTION.GAUCHE
-		
 	main_gauche.update_direction(direction)
 	main_droite.update_direction(direction)
 

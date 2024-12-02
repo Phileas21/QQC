@@ -18,6 +18,7 @@ texture_region_size = Vector2i(64, 64)
 0:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_t4mk5"]
+tile_layout = 4
 tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_bce48")
 
@@ -34,5 +35,5 @@ script = ExtResource("2_glmer")
 
 [node name="Camera2D" type="Camera2D" parent="joueur"]
 position = Vector2(1, 2)
-zoom = Vector2(1.2, 1.2)
+zoom = Vector2(4, 4)
 position_smoothing_enabled = true

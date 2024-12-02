@@ -7,8 +7,8 @@ enum direction{
 }
 
 #position au repos de la main pour l'orientation du personnage vers la droite
-var position_dir_droit := Vector2(34,17)
-var position_dir_gauche := Vector2(31,22)
+var position_dir_droit := Vector2(7,6)
+var position_dir_gauche := Vector2(7,6)
 var position_equilibre = position_dir_gauche
 var position_absolue
 var velocity = Vector2(0,0)
@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 	#var direction = get_parent().direction()
 	# la main est attirée vers une position d'équilibre "position_dir_XXX"
 	var parent_pos = get_parent().position
-	var position_eq = parent_pos + position_equilibre + Vector2(0,3*sin(0.003*Time.get_ticks_msec()))
+	var position_eq = parent_pos + position_equilibre + Vector2(0,1*sin(0.003*Time.get_ticks_msec()))
 	var acceleration = k*(position_eq - position_absolue) - l*velocity
 	velocity += acceleration*delta
 	position = (position_absolue-parent_pos) +  velocity*delta
