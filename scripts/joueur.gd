@@ -88,8 +88,5 @@ func _physics_process(delta: float) -> void:
 	elif vecteur_direction != Vector2i(0,0):
 		is_running = true
 		animated_sprite_2d.play(run_animation_name[direction])
-	
-	main_gauche.update_direction(direction)
-	main_droite.update_direction(direction)
 
 	move_and_slide()
