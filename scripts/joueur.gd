@@ -1,5 +1,10 @@
 extends CharacterBody2D
-
+var touché = 0
+var attacking = false
+var time0 = 0
+signal pv
+signal direction2
+signal touche
 #vitesse de déplacement
 const VITESSE = 50.0
 const un_sur_r2 = 1/sqrt(2)
@@ -44,6 +49,8 @@ func _ready() -> void:
 	animated_sprite_2d.play("idleS")
 
 
+
+
 # processus physiques du joueur ayant lieu au cours d'un temps "delta"
 func _physics_process(delta: float) -> void:
 	
@@ -80,6 +87,18 @@ func _physics_process(delta: float) -> void:
 			direction = DIRECTION.NORDOUEST
 		Vector2i(1,-1):
 			direction = DIRECTION.NORDEST
+			
+			
+	if Input.is_action_pressed("attaque") and attacking == false:
+		attacking = true
+		#print(touché)
+		time0 = Time.get_ticks_msec()
+		if touché == 1:
+			emit_signal("touche")
+			emit_signal("pv",40)
+		
+	if Time.get_ticks_msec()>time0+200:
+		attacking = false
 		
 	#Début de l'animation de repos
 	if is_running and vecteur_direction == Vector2i(0,0):
@@ -90,3 +109,21 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.play(run_animation_name[direction])
 
 	move_and_slide()
+	
+func _input(event):
+	if event is InputEventMouseMotion:
+		emit_signal("direction2",get_global_mouse_position())#event.position)
+
+
+
+
+func _on_zoneattaque_body_entered(body):
+	if body.has_method("enemy"):
+		touché = 1
+		
+		
+
+
+func _on_zoneattaque_body_exited(body):
+	if body.has_method("enemy"):
+		touché = 0
