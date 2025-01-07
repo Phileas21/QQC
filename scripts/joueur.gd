@@ -5,7 +5,7 @@ var time0 = 0
 signal pv
 signal direction2
 signal touche
-#vitesse de déplacement
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 const VITESSE = 50.0
 const un_sur_r2 = 1/sqrt(2)
 enum DIRECTION {
@@ -127,3 +127,7 @@ func _on_zoneattaque_body_entered(body):
 func _on_zoneattaque_body_exited(body):
 	if body.has_method("enemy"):
 		touché = 0
+
+
+func _on_panel_son() -> void:
+	audio_stream_player.play()

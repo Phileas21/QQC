@@ -11,7 +11,7 @@ func _physics_process(delta: float) -> void:
 	if PV>0:
 		_animated_sprite.play("default")
 	if not is_on_floor():
-		velocity = 10*sin(Time.get_ticks_msec()*6.34/1000)*get_gravity() * delta
+		velocity = 0*sin(Time.get_ticks_msec()*6.34/1000)*get_gravity() * delta
 
 
 	move_and_slide()
