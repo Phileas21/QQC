@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://berjmrbnf8s13"]
+[gd_scene load_steps=48 format=4 uid="uid://berjmrbnf8s13"]
 
 [ext_resource type="Texture2D" uid="uid://c28dqi1jxhd1n" path="res://assets/tileset.png" id="1_fnqjm"]
 [ext_resource type="Script" path="res://enemy.gd" id="3_r37wx"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://progress_bar.gd" id="7_6gn5v"]
 [ext_resource type="Script" path="res://panel.gd" id="7_htqd0"]
 [ext_resource type="AudioStream" uid="uid://cdh3p2ku8kjxx" path="res://assets/sons/Enregistrement.mp3" id="9_8vfog"]
+[ext_resource type="Script" path="res://enemy_2.gd" id="11_v3567"]
+[ext_resource type="Script" path="res://progress_bar2.gd" id="12_h11m8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u7vmu"]
 texture = ExtResource("1_fnqjm")
@@ -558,9 +560,38 @@ offset_right = 53.0
 offset_bottom = -27.0
 script = ExtResource("7_6gn5v")
 
+[node name="enemy2" type="CharacterBody2D" parent="."]
+position = Vector2(300, 0)
+up_direction = Vector2(0.995037, -0.0995037)
+script = ExtResource("11_v3567")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemy2"]
+position = Vector2(1, -0.999992)
+scale = Vector2(0.434163, 0.421789)
+sprite_frames = SubResource("SpriteFrames_jq0wy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy2"]
+shape = SubResource("CircleShape2D_v3otj")
+
+[node name="damage2" type="Area2D" parent="enemy2"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="enemy2/damage2"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_xugva")
+
+[node name="ProgressBar" type="ProgressBar" parent="enemy2"]
+offset_left = -49.0
+offset_top = -54.0
+offset_right = 53.0
+offset_bottom = -27.0
+value = 100.0
+script = ExtResource("12_h11m8")
+
 [connection signal="direction2" from="joueur" to="joueur/zoneattaque/CollisionShape2D" method="_on_joueur_direction_2"]
 [connection signal="pv" from="joueur" to="enemy" method="_on_joueur_pv"]
+[connection signal="pv" from="joueur" to="enemy2" method="_on_joueur_pv"]
 [connection signal="touche" from="joueur" to="enemy" method="_on_joueur_touche"]
+[connection signal="touche" from="joueur" to="enemy2" method="_on_joueur_touche"]
 [connection signal="area_entered" from="joueur/zoneattaque" to="joueur" method="_on_zoneattaque_area_entered"]
 [connection signal="area_entered" from="joueur/zoneattaque" to="joueur/zoneattaque/CollisionShape2D" method="_on_zoneattaque_area_entered"]
 [connection signal="area_entered" from="joueur/zoneattaque" to="enemy" method="_on_zoneattaque_area_entered"]
@@ -573,3 +604,10 @@ script = ExtResource("7_6gn5v")
 [connection signal="area_exited" from="enemy/damage" to="enemy" method="_on_damage_area_exited"]
 [connection signal="son" from="enemy/Panel" to="joueur" method="_on_panel_son"]
 [connection signal="pressed" from="enemy/Panel/Talk" to="enemy/Panel" method="_on_talk_pressed"]
+[connection signal="damage" from="enemy2" to="enemy2/ProgressBar" method="_on_enemy_damage"]
+[connection signal="damage" from="enemy2" to="enemy2/ProgressBar" method="_on_enemy_2_damage"]
+[connection signal="pvjoueur" from="enemy2" to="joueur/Pvjoueur" method="_on_enemy_2_pvjoueur"]
+[connection signal="area_entered" from="enemy2/damage2" to="enemy2" method="_on_damage_area_entered"]
+[connection signal="area_exited" from="enemy2/damage2" to="enemy2" method="_on_damage_area_exited"]
+[connection signal="body_entered" from="enemy2/damage2" to="joueur" method="_on_damage_2_body_entered"]
+[connection signal="body_exited" from="enemy2/damage2" to="joueur" method="_on_damage_2_body_exited"]

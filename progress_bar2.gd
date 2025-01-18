@@ -1,5 +1,5 @@
 extends ProgressBar
-signal mort
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,5 +11,8 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_enemy_2_pvjoueur() -> void:
-	self.value-=50
+func _on_enemy_2_damage(pv) -> void:
+	if pv>0:
+		self.value = pv
+	else:
+		self.value = 0
