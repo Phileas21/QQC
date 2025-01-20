@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://berjmrbnf8s13"]
+[gd_scene load_steps=47 format=4 uid="uid://berjmrbnf8s13"]
 
 [ext_resource type="Texture2D" uid="uid://c28dqi1jxhd1n" path="res://assets/tileset.png" id="1_fnqjm"]
 [ext_resource type="Script" path="res://enemy.gd" id="3_r37wx"]
@@ -694,7 +694,6 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_xugva")
 script = ExtResource("4_64ckc")
 
-
 [node name="Panel" type="Panel" parent="enemy"]
 offset_left = -66.0
 offset_right = 40.0
@@ -774,8 +773,8 @@ script = ExtResource("12_h11m8")
 [connection signal="area_exited" from="enemy/damage" to="enemy" method="_on_damage_area_exited"]
 [connection signal="son" from="enemy/Panel" to="joueur" method="_on_panel_son"]
 [connection signal="pressed" from="enemy/Panel/Talk" to="enemy/Panel" method="_on_talk_pressed"]
-[connection signal="damage" from="enemy2" to="enemy2/ProgressBar" method="_on_enemy_damage"]
 [connection signal="damage" from="enemy2" to="enemy2/ProgressBar" method="_on_enemy_2_damage"]
+[connection signal="damage" from="enemy2" to="enemy2/ProgressBar" method="_on_enemy_damage"]
 [connection signal="pvjoueur" from="enemy2" to="joueur/Pvjoueur" method="_on_enemy_2_pvjoueur"]
 [connection signal="area_entered" from="enemy2/damage2" to="enemy2" method="_on_damage_area_entered"]
 [connection signal="area_exited" from="enemy2/damage2" to="enemy2" method="_on_damage_area_exited"]
