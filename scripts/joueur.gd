@@ -2,10 +2,12 @@ extends CharacterBody2D
 var touché = 0
 var attacking = false
 var time0 = 0
+var target = 0
+var ID = 0
 signal pv
 signal direction2
 signal touche
-#vitesse de déplacement
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 const VITESSE = 50.0
 const un_sur_r2 = 1/sqrt(2)
 enum DIRECTION {
@@ -94,8 +96,8 @@ func _physics_process(delta: float) -> void:
 		#print(touché)
 		time0 = Time.get_ticks_msec()
 		if touché == 1:
-			emit_signal("touche")
-			emit_signal("pv",40)
+			emit_signal("touche",ID)
+			emit_signal("pv",40,ID)
 		
 	if Time.get_ticks_msec()>time0+200:
 		attacking = false
@@ -120,10 +122,24 @@ func _input(event):
 func _on_zoneattaque_body_entered(body):
 	if body.has_method("enemy"):
 		touché = 1
-		
+		ID = body.id
 		
 
 
 func _on_zoneattaque_body_exited(body):
 	if body.has_method("enemy"):
 		touché = 0
+		ID = 0
+
+func _on_panel_son() -> void:
+	audio_stream_player.play()
+
+
+func _on_damage_2_body_entered(body: Node2D) -> void:
+	if body.has_method("enemy"):
+		touché = 1
+		ID = body.id
+func _on_damage_2_body_exited(body: Node2D) -> void:
+	if body.has_method("enemy"):
+		touché = 0
+		ID = 0
