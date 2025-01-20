@@ -491,9 +491,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tn4fd"]
-radius = 5.0
-height = 18.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1ukm"]
+size = Vector2(10, 4)
 
 [node name="joueur" type="CharacterBody2D"]
 z_index = 1
@@ -506,8 +505,9 @@ sprite_frames = SubResource("SpriteFrames_bn5it")
 animation = &"runN"
 frame_progress = 0.6982
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_tn4fd")
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13)
+shape = SubResource("RectangleShape2D_y1ukm")
 
 [node name="mains" type="Node2D" parent="."]
 script = ExtResource("4_q3eej")
