@@ -1,10 +1,16 @@
 extends CharacterBody2D
+var enemyscene = load("res://enemy_2.tscn")
+var enemy2 = enemyscene.instantiate()
+var enemy3 = enemyscene.instantiate()
+var enemy4 = enemyscene.instantiate()
 var touché = 0
 var attacking = false
 var time0 = 0
 var target = 0
 var ID = 0
+var enemy_count = 0
 signal pv
+signal positionxy
 signal direction2
 signal touche
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
@@ -56,6 +62,22 @@ func _ready() -> void:
 # processus physiques du joueur ayant lieu au cours d'un temps "delta"
 func _physics_process(delta: float) -> void:
 	
+	emit_signal("positionxy",self.position.x,self.position.y)
+	 
+	#if Time.get_ticks_msec()%1000 <10:
+	#	var rand = randf()
+	#	var spawn = get_parent().get_child(-1)
+	#	if rand<0.5 and enemy_count==0:
+	#		enemy_count +=1
+	#		add_child(enemy2)
+	#		enemy2.position.x = 371
+	#		enemy2.position.y = 10
+	#		add_child(enemy3)
+	#		enemy2.position.x = 400
+	#		enemy2.position.y = 10
+	#		add_child(enemy4)
+	#		enemy2.position.x = 450
+	#		enemy2.position.y = 10
 	# direction = -1,0,1 selon les touches pressées
 	var direction_x := Input.get_axis("déplacement_gauche", "déplacement_droit")
 	var direction_y := Input.get_axis("déplacement_haut", "déplacement_bas")

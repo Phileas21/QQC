@@ -16,3 +16,7 @@ func _on_enemy_2_damage(pv) -> void:
 		self.value = pv
 	else:
 		self.value = 0
+
+
+func _on_enemy_3_damage(a) -> void:
+	self.value = a
