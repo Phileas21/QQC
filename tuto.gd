@@ -23,19 +23,19 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if enemy2.PV<0 :
+	if enemy2.PV<0 and enemy2.dead == true:
 		kcount += 1 
 		dialogue_text.text = "Killcount :" + str(kcount)
 		enemy2.PV = 100
 		enemy2.position.x = 371+randf()*150
 		enemy2.position.y = 10+randf()*150
-	if enemy3.PV<0 :
+	if enemy3.PV<0 and enemy3.dead == true:
 		kcount += 1 
 		dialogue_text.text = "Killcount :" + str(kcount)
 		enemy3.PV = 100
 		enemy3.position.x = 371+randf()*150
 		enemy3.position.y = 10+randf()*150
-	if enemy4.PV<0 :
+	if enemy4.PV<0 and enemy4.dead == true:
 		kcount += 1 
 		dialogue_text.text = "Killcount :" + str(kcount)
 		enemy4.PV = 100

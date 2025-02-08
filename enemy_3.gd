@@ -2,6 +2,7 @@ extends CharacterBody2D
 signal damage
 var PV = 100
 var time0 = 0
+var dead = false
 var attacking = false
 var click = 0
 var X = 0
@@ -13,13 +14,14 @@ var sintheta = 0
 var costheta = 0
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
-#@onready var _animated_sprite = $AnimatedSprite2D2
+@onready var _animated_sprite = $AnimatedSprite2D2
 #@onready var player = get_parent().get_child(3)
 
 func enemy():
 	pass
 
 func _physics_process(delta: float) -> void:
+	dead = false
 	if chasing == true:
 		X = player.position.x-self.position.x
 		Y = player.position.y-self.position.y
@@ -31,7 +33,12 @@ func _physics_process(delta: float) -> void:
 		if X*X+Y*Y>2500 and PV>0 :
 			self.position.x += costheta*0.5
 			self.position.y += sintheta*0.5
-			#_animated_sprite.play("default")
+			if attacking == false:
+				_animated_sprite.play("default")
+		if PV<0:
+			_animated_sprite.play("mort")
+			await get_tree().create_timer(0.7).timeout
+			dead = true
 		else :
 			velocity.x = 0
 			velocity.y = 0
@@ -41,6 +48,7 @@ func _physics_process(delta: float) -> void:
 			if click == 1:
 				time0 = Time.get_ticks_msec()
 				attacking = true
+				_animated_sprite.play("coup")
 				PV-=40
 		emit_signal("damage",40)
 			

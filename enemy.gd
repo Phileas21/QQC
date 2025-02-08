@@ -16,16 +16,3 @@ func _physics_process(delta: float) -> void:
 
 
 	move_and_slide()
-
-
-func _on_joueur_pv(a,b):
-	if b == id:
-		PV -= a
-		if PV<0:
-			PV = 0
-		emit_signal("damage",PV)
-
-func _on_joueur_touche(b):
-	if b == id:
-		if PV<=39:
-			_animated_sprite.play("mort")
