@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bykkf2rsyyg65"]
+
+[ext_resource type="Texture2D" uid="uid://ctw04aqvn5rh4" path="res://assets/items/test_epee.png" id="1_rhyud"]
+[ext_resource type="Script" path="res://scripts/GUI/Inventory/item_data.gd" id="2_74auk"]
+
+[resource]
+script = ExtResource("2_74auk")
+type = 4
+item_name = "Epee"
+item_damage = 5
+item_defense = 0
+description = "\"Les puristes diront que... mais on s'en tape des puristes\""
+item_texture = ExtResource("1_rhyud")

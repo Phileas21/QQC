@@ -1,15 +1,19 @@
-[gd_scene load_steps=25 format=4 uid="uid://berjmrbnf8s13"]
+[gd_scene load_steps=49 format=4 uid="uid://berjmrbnf8s13"]
 
-[ext_resource type="Script" path="res://tuto.gd" id="1_4vbux"]
 [ext_resource type="Texture2D" uid="uid://c28dqi1jxhd1n" path="res://assets/tileset.png" id="1_fnqjm"]
 [ext_resource type="Script" path="res://enemy.gd" id="3_r37wx"]
 [ext_resource type="PackedScene" uid="uid://fckglr7v8fhc" path="res://joueur.tscn" id="3_sixpg"]
 [ext_resource type="Script" path="res://collision_shape_2d.gd" id="4_64ckc"]
+[ext_resource type="Texture2D" uid="uid://d0aajv22nl8ku" path="res://assets/personnage/idle.png" id="4_nxdtk"]
 [ext_resource type="Script" path="res://pvjoueur.gd" id="5_j4lib"]
 [ext_resource type="Texture2D" uid="uid://holeqqdkyrmh" path="res://assets/personnage/mort.png" id="5_xe2d2"]
+[ext_resource type="Script" path="res://progress_bar.gd" id="7_6gn5v"]
 [ext_resource type="Script" path="res://panel.gd" id="7_htqd0"]
-[ext_resource type="Texture2D" uid="uid://bcj5sf1bp5ge" path="res://assets/personnage/leVieux.png" id="8_mvcps"]
 [ext_resource type="AudioStream" uid="uid://cdh3p2ku8kjxx" path="res://assets/sons/Enregistrement.mp3" id="9_8vfog"]
+[ext_resource type="Script" path="res://enemy_2.gd" id="11_v3567"]
+[ext_resource type="Script" path="res://progress_bar2.gd" id="12_h11m8"]
+[ext_resource type="PackedScene" uid="uid://dvuj4xtwoydts" path="res://GUI/Inventory/inventory.tscn" id="13_lpssd"]
+[ext_resource type="Script" path="res://scripts/GUI/gui_control.gd" id="13_n5p4d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u7vmu"]
 texture = ExtResource("1_fnqjm")
@@ -442,40 +446,180 @@ sources/0 = SubResource("TileSetAtlasSource_lodtl")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0wrm"]
 size = Vector2(24, 23)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hh38y"]
-atlas = ExtResource("8_mvcps")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnref"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(0, 0, 32, 39)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pkho7"]
-atlas = ExtResource("8_mvcps")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_oen22"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(32, 0, 32, 39)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hr1nb"]
-atlas = ExtResource("8_mvcps")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_l721l"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(64, 0, 32, 39)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3a0vj"]
-atlas = ExtResource("8_mvcps")
-region = Rect2(96, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_2b1mg"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(96, 0, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ty7ax"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(0, 39, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gy7me"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(32, 39, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iy1w6"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(64, 39, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53om1"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(96, 39, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47a6s"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(0, 78, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7im65"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(32, 78, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slim2"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(64, 78, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vk1vb"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(96, 78, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pguye"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(0, 117, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tln4"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(32, 117, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ortwn"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(64, 117, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ey7t8"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(96, 117, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uh1j1"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(0, 156, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_waks1"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(32, 156, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6r7a"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(64, 156, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hspx8"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(96, 156, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_me80x"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(0, 195, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ukrt1"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(32, 195, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46ry8"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(64, 195, 32, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fpbb"]
+atlas = ExtResource("4_nxdtk")
+region = Rect2(96, 195, 32, 39)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jq0wy"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hh38y")
+"texture": SubResource("AtlasTexture_xnref")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pkho7")
+"texture": SubResource("AtlasTexture_oen22")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hr1nb")
+"texture": SubResource("AtlasTexture_l721l")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3a0vj")
+"texture": SubResource("AtlasTexture_2b1mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ty7ax")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gy7me")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iy1w6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53om1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47a6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7im65")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slim2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vk1vb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pguye")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tln4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ortwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ey7t8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uh1j1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_waks1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6r7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hspx8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_me80x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ukrt1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46ry8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fpbb")
 }],
 "loop": true,
 "name": &"default",
-"speed": 3.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -493,7 +637,6 @@ radius = 31.1448
 size = Vector2(63, 51)
 
 [node name="tuto" type="Node2D"]
-script = ExtResource("1_4vbux")
 
 [node name="Terre" type="TileMapLayer" parent="."]
 position = Vector2(0, 1)
@@ -515,11 +658,12 @@ position = Vector2(-244, 80)
 
 [node name="Camera2D" type="Camera2D" parent="joueur"]
 position = Vector2(1, 2)
-zoom = Vector2(1.695, 1.695)
+zoom = Vector2(2.35, 2.35)
 
 [node name="zoneattaque" type="Area2D" parent="joueur"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="joueur/zoneattaque"]
+visible = false
 position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_d0wrm")
 script = ExtResource("4_64ckc")
@@ -534,21 +678,30 @@ offset_right = -94.0
 offset_bottom = 140.0
 script = ExtResource("5_j4lib")
 
-[node name="killcount" type="RichTextLabel" parent="joueur"]
-offset_left = -245.0
-offset_top = 142.0
-offset_right = 17.0
-offset_bottom = 197.0
-text = "Killcount : 0"
+[node name="GUI" type="Control" parent="joueur"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -244.0
+offset_top = -135.0
+offset_right = -204.0
+offset_bottom = -95.0
+script = ExtResource("13_n5p4d")
+
+[node name="Inventory" parent="joueur/GUI" instance=ExtResource("13_lpssd")]
+unique_name_in_owner = true
+z_index = 10
+layout_mode = 1
+offset_left = 1.0
+offset_right = 1.0
 
 [node name="enemy" type="CharacterBody2D" parent="."]
 script = ExtResource("3_r37wx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemy"]
-position = Vector2(0.0266961, 0.9421)
-scale = Vector2(1.62333, 1.68388)
+position = Vector2(1, -0.999992)
+scale = Vector2(0.434163, 0.421789)
 sprite_frames = SubResource("SpriteFrames_jq0wy")
-frame_progress = 0.0811156
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
 shape = SubResource("CircleShape2D_v3otj")
@@ -588,12 +741,45 @@ offset_right = 186.0
 offset_bottom = 118.0
 text = "..."
 
-[node name="Spawn" type="Marker2D" parent="."]
-position = Vector2(371, 10)
+[node name="ProgressBar" type="ProgressBar" parent="enemy"]
+offset_left = -49.0
+offset_top = -54.0
+offset_right = 53.0
+offset_bottom = -27.0
+script = ExtResource("7_6gn5v")
+
+[node name="enemy2" type="CharacterBody2D" parent="."]
+position = Vector2(300, 0)
+up_direction = Vector2(0.995037, -0.0995037)
+script = ExtResource("11_v3567")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemy2"]
+position = Vector2(1, -0.999992)
+scale = Vector2(0.434163, 0.421789)
+sprite_frames = SubResource("SpriteFrames_jq0wy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy2"]
+shape = SubResource("CircleShape2D_v3otj")
+
+[node name="damage2" type="Area2D" parent="enemy2"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="enemy2/damage2"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_xugva")
+
+[node name="ProgressBar" type="ProgressBar" parent="enemy2"]
+offset_left = -49.0
+offset_top = -54.0
+offset_right = 53.0
+offset_bottom = -27.0
+value = 100.0
+script = ExtResource("12_h11m8")
 
 [connection signal="direction2" from="joueur" to="joueur/zoneattaque/CollisionShape2D" method="_on_joueur_direction_2"]
 [connection signal="pv" from="joueur" to="enemy" method="_on_joueur_pv"]
+[connection signal="pv" from="joueur" to="enemy2" method="_on_joueur_pv"]
 [connection signal="touche" from="joueur" to="enemy" method="_on_joueur_touche"]
+[connection signal="touche" from="joueur" to="enemy2" method="_on_joueur_touche"]
 [connection signal="area_entered" from="joueur/zoneattaque" to="joueur" method="_on_zoneattaque_area_entered"]
 [connection signal="area_entered" from="joueur/zoneattaque" to="joueur/zoneattaque/CollisionShape2D" method="_on_zoneattaque_area_entered"]
 [connection signal="area_entered" from="joueur/zoneattaque" to="enemy" method="_on_zoneattaque_area_entered"]
@@ -601,7 +787,15 @@ position = Vector2(371, 10)
 [connection signal="area_exited" from="joueur/zoneattaque" to="joueur" method="_on_zoneattaque_area_exited"]
 [connection signal="body_entered" from="joueur/zoneattaque" to="joueur" method="_on_zoneattaque_body_entered"]
 [connection signal="body_exited" from="joueur/zoneattaque" to="joueur" method="_on_zoneattaque_body_exited"]
+[connection signal="damage" from="enemy" to="enemy/ProgressBar" method="_on_enemy_damage"]
 [connection signal="area_entered" from="enemy/damage" to="enemy" method="_on_damage_area_entered"]
 [connection signal="area_exited" from="enemy/damage" to="enemy" method="_on_damage_area_exited"]
 [connection signal="son" from="enemy/Panel" to="joueur" method="_on_panel_son"]
 [connection signal="pressed" from="enemy/Panel/Talk" to="enemy/Panel" method="_on_talk_pressed"]
+[connection signal="damage" from="enemy2" to="enemy2/ProgressBar" method="_on_enemy_damage"]
+[connection signal="damage" from="enemy2" to="enemy2/ProgressBar" method="_on_enemy_2_damage"]
+[connection signal="pvjoueur" from="enemy2" to="joueur/Pvjoueur" method="_on_enemy_2_pvjoueur"]
+[connection signal="area_entered" from="enemy2/damage2" to="enemy2" method="_on_damage_area_entered"]
+[connection signal="area_exited" from="enemy2/damage2" to="enemy2" method="_on_damage_area_exited"]
+[connection signal="body_entered" from="enemy2/damage2" to="joueur" method="_on_damage_2_body_entered"]
+[connection signal="body_exited" from="enemy2/damage2" to="joueur" method="_on_damage_2_body_exited"]

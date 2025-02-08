@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bsx4mdsstnbny"]
+
+[ext_resource type="Texture2D" uid="uid://hka46xoteqrt" path="res://assets/items/lance.png" id="1_irfa6"]
+[ext_resource type="Script" path="res://scripts/GUI/Inventory/item_data.gd" id="2_qsc7d"]
+
+[resource]
+script = ExtResource("2_qsc7d")
+type = 4
+item_name = "Lance"
+item_damage = 5
+item_defense = 0
+description = "\"Un bout pointu au bout d'un bout d'arbre aboutit à bouter des marabouts.\""
+item_texture = ExtResource("1_irfa6")
