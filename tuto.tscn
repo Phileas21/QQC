@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://berjmrbnf8s13"]
+[gd_scene load_steps=27 format=4 uid="uid://berjmrbnf8s13"]
 
 [ext_resource type="Script" path="res://tuto.gd" id="1_4vbux"]
 [ext_resource type="Texture2D" uid="uid://c28dqi1jxhd1n" path="res://assets/tileset.png" id="1_fnqjm"]
@@ -7,8 +7,10 @@
 [ext_resource type="Script" path="res://collision_shape_2d.gd" id="4_64ckc"]
 [ext_resource type="Script" path="res://pvjoueur.gd" id="5_j4lib"]
 [ext_resource type="Texture2D" uid="uid://holeqqdkyrmh" path="res://assets/personnage/mort.png" id="5_xe2d2"]
+[ext_resource type="Script" path="res://gui.gd" id="7_fs6j2"]
 [ext_resource type="Script" path="res://panel.gd" id="7_htqd0"]
 [ext_resource type="Texture2D" uid="uid://bcj5sf1bp5ge" path="res://assets/personnage/leVieux.png" id="8_mvcps"]
+[ext_resource type="PackedScene" uid="uid://dvuj4xtwoydts" path="res://GUI/Inventory/inventory.tscn" id="8_tjm4n"]
 [ext_resource type="AudioStream" uid="uid://cdh3p2ku8kjxx" path="res://assets/sons/Enregistrement.mp3" id="9_8vfog"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u7vmu"]
@@ -540,6 +542,22 @@ offset_top = 142.0
 offset_right = 17.0
 offset_bottom = 197.0
 text = "Killcount : 0"
+
+[node name="GUI" type="Control" parent="joueur"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_fs6j2")
+
+[node name="Inventory" parent="joueur/GUI" instance=ExtResource("8_tjm4n")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -304.0
+offset_top = -149.0
+offset_right = -304.0
+offset_bottom = -149.0
 
 [node name="enemy" type="CharacterBody2D" parent="."]
 script = ExtResource("3_r37wx")

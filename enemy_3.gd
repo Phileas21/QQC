@@ -46,10 +46,13 @@ func _physics_process(delta: float) -> void:
 			attacking = false
 		if Input.is_action_pressed("attaque") and attacking == false:
 			if click == 1:
+				self.position.x -= costheta*10
+				self.position.y -= sintheta*10
 				time0 = Time.get_ticks_msec()
 				attacking = true
 				_animated_sprite.play("coup")
 				PV-=40
+				
 		emit_signal("damage",40)
 			
 	

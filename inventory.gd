@@ -8,12 +8,12 @@ var test_chest =[]#generate_loot(1,2)
 #var test= table.generate_loot(1,2)
 
 func _ready():
-	#for i in 1000:
-		#print("a")
+	for i in 1000:
+		print("a")
 	for i in 24: #nombre de slots
 		var slot:= InventorySlot.new()
 		slot.init(ItemData.Type.MAIN, Vector2(32,32))# Nom des slots, taille des slots
-		%PlayerGrid.add_child(slot)
+	%PlayerGrid.add_child(slot)
 	for i in items_to_load.size():
 		var item:=InventoryItem.new()
 		item.init(load(items_to_load[i]))
