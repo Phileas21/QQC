@@ -1,4 +1,8 @@
 extends CharacterBody2D
+
+
+
+
 var touché = 0
 var attacking = false
 var time0 = 0

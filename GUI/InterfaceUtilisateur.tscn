@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://qctnb6rokjqf"]
+
+[ext_resource type="FontFile" uid="uid://pa7o63giybom" path="res://assets/fonts/dogicapixelbold.ttf" id="1_buibw"]
+[ext_resource type="Script" path="res://GUI/interface_utilisateur.gd" id="1_ybmgd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_52fh2"]
+font = ExtResource("1_buibw")
+font_size = 28
+
+[node name="InterfaceUtilisateur" type="CanvasLayer"]
+script = ExtResource("1_ybmgd")
+
+[node name="Dialogue" type="PanelContainer" parent="."]
+offset_top = 405.0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="ColorRect" type="ColorRect" parent="Dialogue"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Dialogue"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="TexteDialogue" type="Label" parent="Dialogue/MarginContainer"]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_52fh2")
+autowrap_mode = 3
+
+[node name="DefilementLettres" type="Timer" parent="Dialogue"]
+one_shot = true
+
+[connection signal="timeout" from="Dialogue/DefilementLettres" to="." method="_on_defilement_lettres_timeout"]

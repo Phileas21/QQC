@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 	Y = player.position.y-self.position.y
 	costheta = X/(sqrt(X*X+Y*Y))
 	sintheta = Y/(sqrt(X*X+Y*Y))
-	print(X*X+Y*Y)
+	#print(X*X+Y*Y)
 	if X*X+Y*Y<3000:
 		emit_signal("pvjoueur")
 	if PV>0 and X*X+Y*Y>2500 :

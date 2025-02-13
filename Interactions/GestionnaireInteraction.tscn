@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdbdckw7omjjt"]
+
+[ext_resource type="Script" path="res://Interactions/gestionnaire_interaction.gd" id="1_hk3il"]
+[ext_resource type="FontFile" uid="uid://pa7o63giybom" path="res://assets/fonts/dogicapixelbold.ttf" id="2_l05lb"]
+
+[node name="GestionnaireInteraction" type="Node2D"]
+script = ExtResource("1_hk3il")
+
+[node name="TexteInteraction" type="Label" parent="."]
+z_index = 100
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -88.0
+offset_top = -10.0
+offset_right = 86.0
+offset_bottom = 13.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_l05lb")
+theme_override_font_sizes/font_size = 8
+text = "Interagir [E]"
+horizontal_alignment = 1
+vertical_alignment = 1
