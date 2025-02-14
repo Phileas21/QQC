@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=4 uid="uid://berjmrbnf8s13"]
+[gd_scene load_steps=55 format=4 uid="uid://berjmrbnf8s13"]
 
 [ext_resource type="Texture2D" uid="uid://c28dqi1jxhd1n" path="res://assets/tileset.png" id="1_fnqjm"]
 [ext_resource type="Script" path="res://enemy.gd" id="3_r37wx"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://enemy_2.gd" id="11_v3567"]
 [ext_resource type="Script" path="res://progress_bar2.gd" id="12_h11m8"]
 [ext_resource type="Texture2D" uid="uid://n5wdktn5ws13" path="res://assets/entites/leVieux.png" id="13_08jlr"]
+[ext_resource type="Script" path="res://PNJs/le_vieux.gd" id="13_r5j6j"]
 [ext_resource type="PackedScene" uid="uid://b4v6yeqcuekw2" path="res://Modules/ModuleDialogue.tscn" id="14_55eto"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u7vmu"]
@@ -790,6 +791,7 @@ script = ExtResource("12_h11m8")
 
 [node name="LeVieux" type="CharacterBody2D" parent="."]
 position = Vector2(-343, 66)
+script = ExtResource("13_r5j6j")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="LeVieux"]
 sprite_frames = SubResource("SpriteFrames_m36py")
