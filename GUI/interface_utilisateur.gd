@@ -48,6 +48,7 @@ func afficher_dialogue() -> void:
 	match orateur:
 		Dialogue.Orateur.PNJ:
 			menu_options.hide()
+			menu_options.set_process_input(false)
 			$Dialogue/MarginContainer.show()
 			if ligne_index >= dialogue.lignes.size():
 				# On passe à la séquence de dialogue suivante
@@ -57,6 +58,7 @@ func afficher_dialogue() -> void:
 			
 		Dialogue.Orateur.JOUEUR:
 			menu_options.show()
+			menu_options.set_process_input(true)
 			$Dialogue/MarginContainer.hide()
 			menu_options.effacer_options()
 			var num_options:int = dialogue.lignes.size()
@@ -93,7 +95,6 @@ func démarrer_dialogue(dialogues : Dictionary, clé : String):
 	afficher_dialogue()
 
 func séquence_suivante(clé:String):
-	print(clé)
 	clé_dialogue = clé
 	
 	if not clé_dialogue in série_dialogue:
@@ -143,6 +144,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed && event.keycode == KEY_ESCAPE:
 			quitter_dialogue()
+			
 	if event.is_action_pressed("Avancer dialogue"):
 		if ligne_affichée:
 			afficher_dialogue()

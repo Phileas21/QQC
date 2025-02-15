@@ -47,11 +47,13 @@ script = ExtResource("3_5wg53")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Dialogue/Menu_options"]
 layout_mode = 2
+alignment = 1
 
 [node name="sélection" type="Sprite2D" parent="Dialogue/Menu_options"]
 position = Vector2(83, 44)
 scale = Vector2(5, 5)
 texture = ExtResource("3_g5v3y")
+offset = Vector2(0, -0.5)
 
 [node name="DefilementLettres" type="Timer" parent="Dialogue"]
 one_shot = true
