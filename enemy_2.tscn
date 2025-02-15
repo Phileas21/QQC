@@ -1,0 +1,138 @@
+[gd_scene load_steps=17 format=3 uid="uid://ba0garti1gm5b"]
+
+[ext_resource type="Script" path="res://enemy_3.gd" id="1_bbjrt"]
+[ext_resource type="Texture2D" uid="uid://cfdq1lbyml25j" path="res://assets/personnage/serpent.png" id="2_7ls2q"]
+[ext_resource type="Script" path="res://progress_bar2.gd" id="4_oyyi5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdopg"]
+atlas = ExtResource("2_7ls2q")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0blw"]
+atlas = ExtResource("2_7ls2q")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ox4a"]
+atlas = ExtResource("2_7ls2q")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5o3s"]
+atlas = ExtResource("2_7ls2q")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdw46"]
+atlas = ExtResource("2_7ls2q")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohg0r"]
+atlas = ExtResource("2_7ls2q")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkgm3"]
+atlas = ExtResource("2_7ls2q")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0wnw"]
+atlas = ExtResource("2_7ls2q")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7h586"]
+atlas = ExtResource("2_7ls2q")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ihowm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdopg")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_y0blw")
+}],
+"loop": true,
+"name": &"coup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ox4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5o3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdw46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohg0r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkgm3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0wnw")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_7h586")
+}],
+"loop": true,
+"name": &"mort",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dxcu1"]
+radius = 31.1448
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ioiv"]
+size = Vector2(63, 51)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7chnu"]
+radius = 348.006
+
+[node name="enemy3" type="CharacterBody2D"]
+position = Vector2(558, 321)
+up_direction = Vector2(0.995037, -0.0995037)
+script = ExtResource("1_bbjrt")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.52669, 4.37799)
+scale = Vector2(1.71708, 1.64863)
+sprite_frames = SubResource("SpriteFrames_ihowm")
+animation = &"mort"
+frame_progress = 0.628792
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dxcu1")
+
+[node name="damage3" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="damage3"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_4ioiv")
+
+[node name="ProgressBar2" type="ProgressBar" parent="."]
+visible = false
+offset_left = -49.0
+offset_top = -54.0
+offset_right = 53.0
+offset_bottom = -27.0
+value = 100.0
+script = ExtResource("4_oyyi5")
+metadata/_edit_use_anchors_ = true
+
+[node name="detection" type="Area2D" parent="."]
+
+[node name="detectionshape" type="CollisionShape2D" parent="detection"]
+shape = SubResource("CircleShape2D_7chnu")
+
+[connection signal="damage" from="." to="ProgressBar2" method="_on_enemy_3_damage"]
+[connection signal="animation_finished" from="AnimatedSprite2D2" to="." method="_on_animated_sprite_2d_2_animation_finished"]
+[connection signal="area_entered" from="damage3" to="." method="_on_damage_3_area_entered"]
+[connection signal="area_exited" from="damage3" to="." method="_on_damage_3_area_exited"]
+[connection signal="input_event" from="damage3" to="." method="_on_damage_3_input_event"]
+[connection signal="body_entered" from="detection" to="." method="_on_detection_body_entered"]
