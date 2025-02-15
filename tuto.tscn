@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://berjmrbnf8s13"]
+[gd_scene load_steps=55 format=4 uid="uid://berjmrbnf8s13"]
 
 [ext_resource type="Script" path="res://tuto.gd" id="1_4vbux"]
 [ext_resource type="Texture2D" uid="uid://c28dqi1jxhd1n" path="res://assets/tileset.png" id="1_fnqjm"]
@@ -12,7 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://bcj5sf1bp5ge" path="res://assets/personnage/leVieux.png" id="8_mvcps"]
 [ext_resource type="PackedScene" uid="uid://dvuj4xtwoydts" path="res://GUI/Inventory/inventory.tscn" id="8_tjm4n"]
 [ext_resource type="AudioStream" uid="uid://cdh3p2ku8kjxx" path="res://assets/sons/Enregistrement.mp3" id="9_8vfog"]
-
+[ext_resource type="Texture2D" uid="uid://n5wdktn5ws13" path="res://assets/entites/leVieux.png" id="13_08jlr"]
+[ext_resource type="Script" path="res://PNJs/le_vieux.gd" id="13_r5j6j"]
+[ext_resource type="PackedScene" uid="uid://b4v6yeqcuekw2" path="res://Modules/ModuleDialogue.tscn" id="14_55eto"]
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u7vmu"]
 texture = ExtResource("1_fnqjm")
 0:0/0 = 0
@@ -494,6 +496,34 @@ radius = 31.1448
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xugva"]
 size = Vector2(63, 51)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_octoa"]
+atlas = ExtResource("13_08jlr")
+region = Rect2(1, 1, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4pea1"]
+atlas = ExtResource("13_08jlr")
+region = Rect2(97, 1, 30, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m36py"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_octoa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4pea1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_74w0r"]
+size = Vector2(12, 19)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7vyfm"]
+radius = 47.5184
+
 [node name="tuto" type="Node2D"]
 script = ExtResource("1_4vbux")
 
@@ -514,6 +544,7 @@ tile_set = SubResource("TileSet_4kj5b")
 
 [node name="joueur" parent="." instance=ExtResource("3_sixpg")]
 position = Vector2(-244, 80)
+collision_layer = 3
 
 [node name="Camera2D" type="Camera2D" parent="joueur"]
 position = Vector2(1, 2)
@@ -608,6 +639,23 @@ text = "..."
 
 [node name="Spawn" type="Marker2D" parent="."]
 position = Vector2(371, 10)
+
+[node name="LeVieux" type="CharacterBody2D" parent="."]
+position = Vector2(-343, 66)
+script = ExtResource("13_r5j6j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="LeVieux"]
+sprite_frames = SubResource("SpriteFrames_m36py")
+frame_progress = 0.0230948
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeVieux"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_74w0r")
+
+[node name="ModuleDialogue" parent="LeVieux" instance=ExtResource("14_55eto")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeVieux/ModuleDialogue"]
+shape = SubResource("CircleShape2D_7vyfm")
 
 [connection signal="direction2" from="joueur" to="joueur/zoneattaque/CollisionShape2D" method="_on_joueur_direction_2"]
 [connection signal="pv" from="joueur" to="enemy" method="_on_joueur_pv"]

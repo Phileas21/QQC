@@ -1,8 +1,14 @@
 extends CharacterBody2D
+
 var enemyscene = load("res://enemy_2.tscn")
 var enemy2 = enemyscene.instantiate()
 var enemy3 = enemyscene.instantiate()
 var enemy4 = enemyscene.instantiate()
+
+
+
+
+
 var touché = 0
 var attacking = false
 var time0 = 0
